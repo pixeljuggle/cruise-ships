@@ -1,9 +1,12 @@
-const Port = require("./port");
-
 class Ship {
-  constructor(startingPort = null, passengerAboard = 0) {
-    this.port = startingPort;
-    this.destination = null;
+  constructor(
+    itinerary = { ports: [{ name: "The island from Lost" }] },
+    passengerAboard = 0
+  ) {
+    this.itinerary = itinerary.ports;
+    this.previousPort = null;
+    this.currentPort = itinerary.ports[0];
+    this.nextPort = null;
     this.passengersAboard = passengerAboard;
   }
 
@@ -11,18 +14,35 @@ class Ship {
     return this.passengersAboard++;
   }
 
-  setSail(destination = "secret") {
-    this.port = null;
-    this.destination = destination;
+  setSail() {
+    const nextPortIndex = this.itinerary.indexOf(this.currentPort) + 1;
+
+    if (!this.itinerary[nextPortIndex]) {
+      throw new Error("Sorry, nowhere to go !");
+    }
+
+    this.previousPort = this.currentPort;
+    this.nextPort = this.itinerary[nextPortIndex];
+    this.currentPort = null;
   }
 
-  dock(port) {
-    this.port = port;
-    this.destination = null;
+  dock() {
+    if (!this.atSea) {
+      throw new Error("Already docked");
+    }
+    this.currentPort = this.nextPort;
+
+    const nextPortIndex = this.itinerary.indexOf(this.nextPort) + 1;
+
+    if (!this.itinerary[nextPortIndex]) {
+      this.nextPort = null;
+    } else {
+      this.nextPort = this.itinerary[nextPortIndex];
+    }
   }
 
-  get atSea (){
-    return this.port === null
+  get atSea() {
+    return this.currentPort === null;
   }
 }
 

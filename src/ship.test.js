@@ -1,16 +1,23 @@
 const Ship = require("./ship");
 const Port = require("./port");
+const Itinerary = require("./itinerary");
 
 describe("Ship", () => {
   const stockport = new Port("Stockport");
-  const cruise = new Ship(stockport, 10);
-  
+  const liverpool = new Port("Liverpool");
+  const bestCruise = new Itinerary([stockport, liverpool]);
+  const cruise = new Ship(bestCruise, 10);
+
   it("returns an object", () => {
     expect(new Ship()).toBeInstanceOf(Object);
   });
 
   it("sets the port.", () => {
-    expect(cruise.port).toEqual({"name": "Stockport"});
+    expect(cruise.currentPort).toEqual({ name: "Stockport" });
+  });
+
+  it("has no previous port.", () => {
+    expect(cruise.previousPort).toEqual(null);
   });
 
   it("sets the passengers aboard.", () => {
@@ -30,11 +37,13 @@ describe("Ship", () => {
 describe("setSail", () => {
   const stockport = new Port("Stockport");
   const liverpool = new Port("Liverpool");
-  const cruise = new Ship(stockport, 10);
+  const bestCruise = new Itinerary([stockport, liverpool]);
+  const cruise = new Ship(bestCruise);
+
   cruise.setSail(liverpool);
 
   it("leaves the port", () => {
-    expect(cruise.port).toEqual(null);
+    expect(cruise.currentPort).toEqual(null);
   });
 
   it("is at sea", () => {
@@ -42,19 +51,24 @@ describe("setSail", () => {
   });
 
   it("has a desired destination", () => {
-    expect(cruise.destination).toEqual({"name": "Liverpool"});
+    expect(cruise.nextPort).toEqual({ name: "Liverpool" });
+  });
+
+  it("has a previousPort", () => {
+    expect(cruise.previousPort).toEqual({ name: "Stockport" });
   });
 });
 
 describe("dock", () => {
   const stockport = new Port("Stockport");
   const liverpool = new Port("Liverpool");
-  const cruise = new Ship(stockport, 10);
-  cruise.setSail(liverpool);
-  cruise.dock(liverpool);
+  const bestCruise = new Itinerary([stockport, liverpool]);
+  const cruise = new Ship(bestCruise);
+  cruise.setSail();
+  cruise.dock();
 
   it("can dock at a port", () => {
-    expect(cruise.port).toEqual({"name": "Liverpool"});
+    expect(cruise.currentPort).toEqual({ name: "Liverpool" });
   });
 
   it("is at sea", () => {
@@ -62,6 +76,6 @@ describe("dock", () => {
   });
 
   it("has reached destination", () => {
-    expect(cruise.destination).toEqual(null);
+    expect(cruise.nextPort).toEqual(null);
   });
 });

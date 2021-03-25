@@ -10,5 +10,4 @@ describe("Port", () => {
   it("has a name.", () => {
     expect(stockport.name).toEqual("Stockport");
   });
-
 });
