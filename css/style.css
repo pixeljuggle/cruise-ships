@@ -21,6 +21,7 @@ body {
   width: 0px;
   margin-top: 96px;
   display: flex;
+  flex-direction: row;
   justify-content: space-around;
 }
 
@@ -28,4 +29,16 @@ body {
   background-image: url('../images/port.png');
   width: 64px;
   height: 32px;
+}
+
+#ships {
+  position: relative;
+}
+
+#ships > #ship {
+  position: absolute;
+  background-image: url('../images/ship.png');
+  width: 128px;
+  height: 64px;
+  /* left: 70px; */
 }

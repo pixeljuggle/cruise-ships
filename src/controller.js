@@ -23,11 +23,22 @@
         newPort.dataset.portName = p.name;
         newPort.dataset.portIndex = i;
         newPort.className = "port";
+        newPort.title = p.name;
         portsElement.appendChild(newPort);
 
         const portsElementWidth = parseInt(portsElement.style.width, 10);
         portsElement.style.width = `${portsElementWidth + 256}px`;
       });
+    }
+
+    renderShip(ship) {
+      const currentPortIndex = ship.itinerary.indexOf(ship.currentPort);
+      const portElement = document.querySelector(
+        `[data-port-index='${currentPortIndex}']`
+      );
+      const shipElement = document.querySelector("#ship");
+      shipElement.style.top = `${portElement.offsetTop - 100}px`;
+      shipElement.style.left = `${portElement.offsetLeft - 40}px`;
     }
   }
 

@@ -11,8 +11,10 @@
 
   <div id="viewport">
 
-    <div id="ports">
+    <div id="ports"></div>
 
+    <div id="ships">
+      <div id="ship"></div>
     </div>
 
   </div>
@@ -29,7 +31,10 @@
     const warrington = new Port("Warrington");
     const liverpool = new Port("Liverpool");
     const bestCruise = new Itinerary([stockport, chorlton, warrington, warrington, liverpool]);
-    controller.renderPorts(bestCruise.ports)
+    const ship = new Ship(bestCruise);
+
+    controller.renderPorts(bestCruise.ports);
+    controller.renderShip(ship);
   </script>
 </body>
 </html>
