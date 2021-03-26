@@ -10,6 +10,11 @@
 <body>
 
   <div id="viewport">
+
+    <div id="ports">
+
+    </div>
+
   </div>
   
   <script src="./src/ship.js"></script>
@@ -19,6 +24,12 @@
 
   <script>
     const controller = new Controller();
+    const stockport = new Port("Stockport");
+    const chorlton = new Port("Chorltonville");
+    const warrington = new Port("Warrington");
+    const liverpool = new Port("Liverpool");
+    const bestCruise = new Itinerary([stockport, chorlton, warrington, warrington, liverpool]);
+    controller.renderPorts(bestCruise.ports)
   </script>
 </body>
 </html>

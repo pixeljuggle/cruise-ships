@@ -1,6 +1,22 @@
 (function exportItinerary() {
+
+  const lost = {
+    "name": "The Island, from Lost!.",
+    "ships": [
+        {
+            "shipName": "Black Rock",
+            "itinerary": [],
+            "previousPort": null,
+            "currentPort": {
+                "name": "The Island, from Lost!."
+            },
+            "nextPort": null,
+            "passengersAboard": 0
+        }
+    ]
+}
   class Itinerary {
-    constructor(ports = []) {
+    constructor(ports = [lost]) {
       this.ports = ports;
     }
   

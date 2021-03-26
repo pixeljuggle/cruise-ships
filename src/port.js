@@ -1,5 +1,4 @@
 (function exportPort() {
-
   class Port {
     constructor(portName = "secret") {
       this.name = portName;
