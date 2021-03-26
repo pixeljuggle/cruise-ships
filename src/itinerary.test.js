@@ -12,7 +12,7 @@ describe("Itinerary", () => {
     const liverpool = new Port("Liverpool");
     const bestCruise = new Itinerary([stockport, liverpool]);
 
-    const expected = [{ name: "Stockport" }, { name: "Liverpool" }];
-    expect(bestCruise.ports).toEqual(expected);
+    expect(bestCruise.ports[0]).toEqual(stockport);
+    expect(bestCruise.ports[1]).toEqual(liverpool);
   });
 });

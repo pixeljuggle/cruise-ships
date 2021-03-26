@@ -1,12 +1,15 @@
 class Ship {
   constructor(
-    itinerary = { ports: [{ name: "The island from Lost" }] },
-    passengerAboard = 0
+    itinerary = [],
+    passengerAboard = 0,
+    name = (Math.floor(Math.random() * (9999 - 1000) + 1000))
   ) {
+    this.shipName = name;
     this.itinerary = itinerary.ports;
     this.previousPort = null;
-    this.currentPort = itinerary.ports[0];
-    this.nextPort = null;
+    this.currentPort = this.itinerary[0];
+    this.currentPort.addShip(this);
+    this.nextPort = this.itinerary[1];;
     this.passengersAboard = passengerAboard;
   }
 
@@ -17,9 +20,15 @@ class Ship {
   setSail() {
     const nextPortIndex = this.itinerary.indexOf(this.currentPort) + 1;
 
+    if (this.atSea) {
+      throw new Error("Already set sail");
+    }
+
     if (!this.itinerary[nextPortIndex]) {
       throw new Error("Sorry, nowhere to go !");
     }
+   
+    this.currentPort.removeShip(this);
 
     this.previousPort = this.currentPort;
     this.nextPort = this.itinerary[nextPortIndex];
@@ -30,7 +39,9 @@ class Ship {
     if (!this.atSea) {
       throw new Error("Already docked");
     }
+
     this.currentPort = this.nextPort;
+    this.currentPort.addShip(this);
 
     const nextPortIndex = this.itinerary.indexOf(this.nextPort) + 1;
 

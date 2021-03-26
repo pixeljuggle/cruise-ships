@@ -9,11 +9,15 @@ describe("Ship", () => {
   const cruise = new Ship(bestCruise, 10);
 
   it("returns an object", () => {
-    expect(new Ship()).toBeInstanceOf(Object);
+    expect(cruise).toBeInstanceOf(Object);
   });
 
   it("sets the port.", () => {
-    expect(cruise.currentPort).toEqual({ name: "Stockport" });
+    expect(cruise.currentPort.name).toEqual(bestCruise.ports[0].name);
+  });
+
+  it("adds the ship to the port.", () => {
+    expect(cruise.currentPort.ships).toContain(cruise);
   });
 
   it("has no previous port.", () => {
@@ -46,16 +50,21 @@ describe("setSail", () => {
     expect(cruise.currentPort).toEqual(null);
   });
 
+  it("ship is removed from the port", () => {
+
+    expect(cruise.previousPort.ships).not.toContain(cruise);
+  });
+
   it("is at sea", () => {
     expect(cruise.atSea).toEqual(true);
   });
 
   it("has a desired destination", () => {
-    expect(cruise.nextPort).toEqual({ name: "Liverpool" });
+    expect(cruise.nextPort.name).toEqual("Liverpool");
   });
 
   it("has a previousPort", () => {
-    expect(cruise.previousPort).toEqual({ name: "Stockport" });
+    expect(cruise.previousPort.name).toEqual("Stockport");
   });
 });
 
@@ -68,7 +77,11 @@ describe("dock", () => {
   cruise.dock();
 
   it("can dock at a port", () => {
-    expect(cruise.currentPort).toEqual({ name: "Liverpool" });
+    expect(cruise.currentPort.name).toEqual("Liverpool");
+  });
+
+  it("adds the ship to the port.", () => {
+    expect(cruise.currentPort.ships).toContain(cruise);
   });
 
   it("is at sea", () => {
