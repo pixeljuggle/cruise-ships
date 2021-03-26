@@ -46,10 +46,6 @@ describe("Ship", () => {
 });
 
 describe("setSail", () => {
-  // const stockport = new Port("Stockport");
-  // const liverpool = new Port("Liverpool");
-  // const bestCruise = new Itinerary([stockport, liverpool]);
-  // const cruise = new Ship(bestCruise);
 
   let stockport;
   let liverpool;
@@ -86,10 +82,6 @@ describe("setSail", () => {
 });
 
 describe("dock", () => {
-  // const stockport = new Port("Stockport");
-  // const liverpool = new Port("Liverpool");
-  // const bestCruise = new Itinerary([stockport, liverpool]);
-  // const cruise = new Ship(bestCruise);
 
   let stockport;
   let liverpool;
