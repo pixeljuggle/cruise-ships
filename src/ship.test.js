@@ -3,10 +3,17 @@ const Port = require("./port");
 const Itinerary = require("./itinerary");
 
 describe("Ship", () => {
-  const stockport = new Port("Stockport");
-  const liverpool = new Port("Liverpool");
-  const bestCruise = new Itinerary([stockport, liverpool]);
-  const cruise = new Ship(bestCruise, 10);
+  let stockport;
+  let liverpool;
+  let bestCruise;
+  let cruise;
+
+  beforeEach(() => {
+    stockport = new Port("Stockport");
+    liverpool = new Port("Liverpool");
+    bestCruise = new Itinerary([stockport, liverpool]);
+    cruise = new Ship(bestCruise, 10);
+  });
 
   it("returns an object", () => {
     expect(cruise).toBeInstanceOf(Object);
@@ -39,19 +46,29 @@ describe("Ship", () => {
 });
 
 describe("setSail", () => {
-  const stockport = new Port("Stockport");
-  const liverpool = new Port("Liverpool");
-  const bestCruise = new Itinerary([stockport, liverpool]);
-  const cruise = new Ship(bestCruise);
+  // const stockport = new Port("Stockport");
+  // const liverpool = new Port("Liverpool");
+  // const bestCruise = new Itinerary([stockport, liverpool]);
+  // const cruise = new Ship(bestCruise);
 
-  cruise.setSail(liverpool);
+  let stockport;
+  let liverpool;
+  let bestCruise;
+  let cruise;
+
+  beforeEach(() => {
+    stockport = new Port("Stockport");
+    liverpool = new Port("Liverpool");
+    bestCruise = new Itinerary([stockport, liverpool]);
+    cruise = new Ship(bestCruise, 10);
+    cruise.setSail();
+  });
 
   it("leaves the port", () => {
     expect(cruise.currentPort).toEqual(null);
   });
 
   it("ship is removed from the port", () => {
-
     expect(cruise.previousPort.ships).not.toContain(cruise);
   });
 
@@ -69,12 +86,24 @@ describe("setSail", () => {
 });
 
 describe("dock", () => {
-  const stockport = new Port("Stockport");
-  const liverpool = new Port("Liverpool");
-  const bestCruise = new Itinerary([stockport, liverpool]);
-  const cruise = new Ship(bestCruise);
-  cruise.setSail();
-  cruise.dock();
+  // const stockport = new Port("Stockport");
+  // const liverpool = new Port("Liverpool");
+  // const bestCruise = new Itinerary([stockport, liverpool]);
+  // const cruise = new Ship(bestCruise);
+
+  let stockport;
+  let liverpool;
+  let bestCruise;
+  let cruise;
+
+  beforeEach(() => {
+    stockport = new Port("Stockport");
+    liverpool = new Port("Liverpool");
+    bestCruise = new Itinerary([stockport, liverpool]);
+    cruise = new Ship(bestCruise, 10);
+    cruise.setSail();
+    cruise.dock();
+  });
 
   it("can dock at a port", () => {
     expect(cruise.currentPort.name).toEqual("Liverpool");

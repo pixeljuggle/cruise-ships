@@ -3,6 +3,7 @@ const Port = require("./port");
 const Itinerary = require("./itinerary");
 
 describe("Port", () => {
+  
   const stockport = new Port("Stockport");
   const liverpool = new Port("Liverpool");
   const bestCruise = new Itinerary([stockport, liverpool]);
