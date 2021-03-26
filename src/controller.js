@@ -24,6 +24,12 @@
         newPort.dataset.portIndex = i;
         newPort.className = "port";
         newPort.title = p.name;
+        if (ship.currentPort === ports[0] && ship.currentPort.name === p.name) {
+          newPort.innerHTML = `<div class="portWelcomeSign">Say goodbye to ${p.name}</div>`;
+        } else if (ship.currentPort && ship.currentPort.name === p.name) {
+          newPort.innerHTML = `<div class="portWelcomeSign">Welcome to ${p.name}</div>`;
+        }
+
         portsElement.appendChild(newPort);
 
         const portsElementWidth = parseInt(portsElement.style.width, 10);

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
   <link rel="stylesheet" href="./css/normalize.css">
   <link rel="stylesheet" href="./css/style.css">
 </head>
+
 <body>
 
   <div id="viewport">
@@ -18,7 +20,7 @@
     </div>
 
   </div>
-  
+
   <script src="./src/ship.js"></script>
   <script src="./src/itinerary.js"></script>
   <script src="./src/port.js"></script>
@@ -30,11 +32,14 @@
     const chorlton = new Port("Chorltonville");
     const warrington = new Port("Warrington");
     const liverpool = new Port("Liverpool");
-    const bestCruise = new Itinerary([stockport, chorlton, warrington, warrington, liverpool]);
+    const bestCruise = new Itinerary([stockport, chorlton, warrington, liverpool]);
     const ship = new Ship(bestCruise);
-
+    // ship.setSail()
+    // ship.dock()
     controller.renderPorts(bestCruise.ports);
     controller.renderShip(ship);
+
   </script>
 </body>
+
 </html>
