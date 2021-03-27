@@ -1,7 +1,54 @@
 (function exportController() {
   class Controller {
-    constructor() {
+    constructor(ship) {
+      this.ship = ship;
       this.initialiseSea();
+
+      document.querySelector("#sailbutton").addEventListener("click", () => {
+        this.setSail();
+      });
+    }
+
+    infoPanel() {
+      const infoElement = document.querySelector("#info");
+
+      let shipStatus = "At Sea";
+      let nextPort = "End of journey";
+      if (this.ship.atSea === false) {
+        shipStatus = `Docked At ${this.ship.currentPort.name}`;
+      }
+      if (this.ship.nextPort) {
+        nextPort = `Next Port: ${this.ship.nextPort.name}`
+      }
+      
+      infoElement.innerHTML = `<h3>${shipStatus}</h3>
+      <p>${nextPort}</p>`;
+    }
+
+    setSail() {
+      const ship = this.ship;
+      if (!ship.nextPort) {
+        return alert('Sorry, this is the end !');
+      }
+      const currentPortIndex = ship.itinerary.indexOf(ship.currentPort);
+      ship.setSail();
+      const nextPortIndex = currentPortIndex + 1;
+      const nextPortElement = document.querySelector(
+        `[data-port-index='${nextPortIndex}']`
+      );
+
+      const shipElement = document.querySelector("#ship");
+      const sailInterval = setInterval(() => {
+      const shipLeft = parseInt(shipElement.style.left);
+        
+        if (shipLeft === nextPortElement.offsetLeft - 30) {
+          ship.dock();
+          clearInterval(sailInterval);
+        }
+
+        shipElement.style.left = `${shipLeft + 1}px`;
+        this.infoPanel()
+      }, 20);
     }
 
     initialiseSea() {
@@ -24,27 +71,24 @@
         newPort.dataset.portIndex = i;
         newPort.className = "port";
         newPort.title = p.name;
-        if (ship.currentPort === ports[0] && ship.currentPort.name === p.name) {
-          newPort.innerHTML = `<div class="portWelcomeSign">Say goodbye to ${p.name}</div>`;
-        } else if (ship.currentPort && ship.currentPort.name === p.name) {
-          newPort.innerHTML = `<div class="portWelcomeSign">Welcome to ${p.name}</div>`;
-        }
 
         portsElement.appendChild(newPort);
 
         const portsElementWidth = parseInt(portsElement.style.width, 10);
         portsElement.style.width = `${portsElementWidth + 256}px`;
+
       });
     }
 
-    renderShip(ship) {
+    renderShip() {
+      const ship = this.ship;
       const currentPortIndex = ship.itinerary.indexOf(ship.currentPort);
       const portElement = document.querySelector(
         `[data-port-index='${currentPortIndex}']`
       );
       const shipElement = document.querySelector("#ship");
-      shipElement.style.top = `${portElement.offsetTop - 100}px`;
-      shipElement.style.left = `${portElement.offsetLeft - 40}px`;
+      shipElement.style.top = `${portElement.offsetTop + 30}px`;
+      shipElement.style.left = `${portElement.offsetLeft - 30}px`;
     }
   }
 

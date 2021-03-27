@@ -7,8 +7,32 @@ html, body {
 body {
   background-color: #000;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.container {
+  position: relative;
+  width: 640px;
+  height: 306px;
+}
+
+#info {
+ position:absolute;
+ top:10px;
+ left:10px;
+ font-family: VT323;
+ font-size: 12px;
+ color: #21232E;
+ background-color: #F3F9FF;
+ border: #969DB5 solid 1px;
+ padding: 2px 5px;
+}
+
+#info > p, h3{
+  padding: 0;
+  margin: 0;
 }
 
 #viewport {
@@ -37,13 +61,11 @@ body {
   position: relative;
 }
 
-#ships > #ship {
-  position: absolute;
+#ship {
   background-image: url('../images/ship.png');
   width: 128px;
   height: 64px;
-  /* left: 70px; */
-  transition: all 4s;
+  position: absolute;
 }
 
 .portWelcomeSign {
@@ -54,6 +76,23 @@ body {
   border: #969DB5 solid 1px;
   position: absolute;
   padding: 2px 5px;
-  top: 60px;
-  width: 64px;
+  top: 70px;
+}
+
+#sailbutton {
+  padding: 10px 20px;
+  width: 640px;
+  height: 50px;
+  outline: none;
+  border: 0;
+  font-family: VT323;
+  font-size: 24px;
+  color: white;
+  background-color: #FB3640;
+  border-bottom: 4px solid #d8040f;
+}
+
+#sailbutton:hover {
+  background-color: #f04e56;
+  border-bottom: 4px solid #FB3640;
 }

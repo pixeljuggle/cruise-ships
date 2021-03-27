@@ -11,14 +11,22 @@
 
 <body>
 
-  <div id="viewport">
+  <div class="container">
 
-    <div id="ports"></div>
+    <div id="viewport">
 
-    <div id="ships">
+      <div id="ports"></div>
+
       <div id="ship"></div>
+
     </div>
 
+    <button id="sailbutton">Set Sail!</button>
+
+    <div id="info">
+      <h3>Docked At Stockport</h3>
+      <p>Next Port: Chorltonville</p>
+    </div>
   </div>
 
   <script src="./src/ship.js"></script>
@@ -27,17 +35,17 @@
   <script src="./src/controller.js"></script>
 
   <script>
-    const controller = new Controller();
     const stockport = new Port("Stockport");
     const chorlton = new Port("Chorltonville");
     const warrington = new Port("Warrington");
     const liverpool = new Port("Liverpool");
     const bestCruise = new Itinerary([stockport, chorlton, warrington, liverpool]);
     const ship = new Ship(bestCruise);
+    const controller = new Controller(ship);
     // ship.setSail()
     // ship.dock()
     controller.renderPorts(bestCruise.ports);
-    controller.renderShip(ship);
+    controller.renderShip();
 
   </script>
 </body>
