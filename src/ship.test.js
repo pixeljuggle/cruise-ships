@@ -81,6 +81,41 @@ describe("setSail", () => {
   });
 });
 
+
+describe("setSail with spies", () => {
+
+  let stockport;
+  let liverpool;
+  let bestCruise;
+  let cruise;
+
+  beforeEach(() => {
+    stockport = {
+      addShip: jest.fn(),
+      removeShip: jest.fn(),
+      name: 'Stockport',
+      ships: []
+    };
+  
+    liverpool = {
+      addShip: jest.fn(),
+      removeShip: jest.fn(),
+      name: 'Liverpool',
+      ships: []
+    };
+    bestCruise = new Itinerary([stockport, liverpool]);
+    cruise = new Ship(bestCruise, 10);
+  });
+
+  it('can set sail', () => {
+    cruise.setSail();
+    expect(cruise.currentPort).toBeFalsy();
+    expect(stockport.removeShip).toHaveBeenCalledWith(cruise);
+  });
+
+});
+
+
 describe("dock", () => {
 
   let stockport;
@@ -112,4 +147,38 @@ describe("dock", () => {
   it("has reached destination", () => {
     expect(cruise.nextPort).toEqual(null);
   });
+});
+
+describe("can dock at a port with spies", () => {
+
+  let stockport;
+  let liverpool;
+  let bestCruise;
+  let cruise;
+
+  beforeEach(() => {
+    stockport = {
+      addShip: jest.fn(),
+      removeShip: jest.fn(),
+      name: 'Stockport',
+      ships: []
+    };
+  
+    liverpool = {
+      addShip: jest.fn(),
+      removeShip: jest.fn(),
+      name: 'Liverpool',
+      ships: []
+    };
+    bestCruise = new Itinerary([stockport, liverpool]);
+    cruise = new Ship(bestCruise, 10);
+  });
+
+  it('can dock', () => {
+    cruise.setSail();
+    cruise.dock();
+    expect(cruise.currentPort).toBeTruthy();
+    expect(stockport.addShip).toHaveBeenCalledWith(cruise);
+  });
+
 });

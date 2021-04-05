@@ -8,8 +8,19 @@ describe("Itinerary", () => {
   });
 
   it("has ports.", () => {
-    const stockport = new Port("Stockport");
-    const liverpool = new Port("Liverpool");
+    const stockport = {
+      addShip: jest.fn(),
+      removeShip: jest.fn(),
+      name: 'Stockport',
+      ships: []
+    };
+  
+    const liverpool = {
+      addShip: jest.fn(),
+      removeShip: jest.fn(),
+      name: 'Liverpool',
+      ships: []
+    };
     const bestCruise = new Itinerary([stockport, liverpool]);
 
     expect(bestCruise.ports[0]).toEqual(stockport);
