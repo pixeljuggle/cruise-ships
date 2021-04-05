@@ -1,3 +1,7 @@
+## GUI
+
+**Cruise on the River Mersey** interface available [here](https://pixeljuggle.github.io/cruise-ships/ "here")
+
 ## Domain Model
 
 ### Ship 🛳️
