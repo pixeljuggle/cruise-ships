@@ -2,16 +2,22 @@
 
 html, body {
   height: 100%;
+  font-family: VT323;
 }
 
 body {
   background-color: #000;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
 }
 
+.title{
+  color: white;
+  font-weight: 100;
+  margin: 10vh 0px;
+}
 .container {
   position: relative;
   width: 640px;
@@ -23,7 +29,7 @@ body {
  top:10px;
  left:10px;
  font-family: VT323;
- font-size: 12px;
+ font-size: 16px;
  color: #21232E;
  background-color: #F3F9FF;
  border: #969DB5 solid 1px;
@@ -69,7 +75,6 @@ body {
 }
 
 .portWelcomeSign {
-  font-family: VT323;
   font-size: 12px;
   color: #21232E;
   background-color: #F3F9FF;

@@ -28,7 +28,9 @@
     setSail() {
       const ship = this.ship;
       if (!ship.nextPort) {
-        return alert('Sorry, this is the end !');
+        const theEndMessage = `Sorry, this is the end of the road, or sea.
+Refresh the page to restart`
+        return alert(theEndMessage);
       }
       const currentPortIndex = ship.itinerary.indexOf(ship.currentPort);
       ship.setSail();
